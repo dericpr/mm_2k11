@@ -8,7 +8,7 @@
     <?php
     include_once "shared/ez_sql_core.php";
     include_once "ez_sql.php";
-    $db = new ezSQL_mysql('mm_user','!!yeradeadman!!2','mm_2k11','localhost');
+    $db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
     ?>
     <body>
         <a href="http://jquery.com/">jQuery</a>
