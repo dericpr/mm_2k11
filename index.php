@@ -24,8 +24,14 @@
         print("HEYLOOOOO");
         print("<BR>");
         print("Quick DB test<BR>");
-        $current_time = $db->get_var("SELECT " . $db->sysdate());
-	print "ezSQL demo for mySQL database run @ $current_time";
+        $users = $db->get_results("SELECT * FROM users");
+	foreach ( $users as $user )
+        {
+            // Access data using object syntax
+            echo "First Name : ". $user->f_name;
+            echo "Last Name : ". $user->l_name;
+            echo "Email : ". $user->email;
+        }
         ?>
     </body>
 </html>
