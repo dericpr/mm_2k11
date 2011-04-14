@@ -8,6 +8,7 @@
     <?php
     include_once "shared/ez_sql_core.php";
     include_once "ez_sql.php";
+    $db = new ezSQL_mysql('mm_user','!!yeradeadman!!2','mm_2k11','localhost');
     ?>
     <body>
         <a href="http://jquery.com/">jQuery</a>
@@ -21,6 +22,10 @@
         </script>
         <?php
         print("HEYLOOOOO");
+        print("<BR>");
+        print("Quick DB test<BR>");
+        $current_time = $db->get_var("SELECT " . $db->sysdate());
+	print "ezSQL demo for mySQL database run @ $current_time";
         ?>
     </body>
 </html>
