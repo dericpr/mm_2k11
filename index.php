@@ -5,6 +5,9 @@
         <title>Murder Mystery Party - 2011</title>
          <script src="jquery.js"></script>
     </head>
+    <?php
+    include_once "ez_sql.php";
+    ?>
     <body>
         <a href="http://jquery.com/">jQuery</a>
         <script>
