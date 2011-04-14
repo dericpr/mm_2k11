@@ -6,6 +6,7 @@
          <script src="jquery.js"></script>
     </head>
     <?php
+    include_once "shared/ez_sql_core.php";
     include_once "ez_sql.php";
     ?>
     <body>
