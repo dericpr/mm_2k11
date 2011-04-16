@@ -24,7 +24,7 @@
         print("HEYLOOOOO");
         print("<BR>");
         print("Quick DB test<BR>");
-        $users = $db->get_results("SELECT * FROM users");
+        $users = $db->get_results("SELECT * FROM user");
 	foreach ( $users as $user )
         {
             // Access data using object syntax
