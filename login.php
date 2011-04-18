@@ -15,13 +15,22 @@ if ( $users ) {
     {
         if ( $user->password == $pass )
         {
-            $_SESSION['f_name'] = $user->f_name;
-            $_SESSION['l_name'] = $user->l_name;
-            $_SESSION['email'] = $user->email;
-            $_SESSION['level'] = $user->access_level;
+           
             $data['login'] = true;
             $data['user'] = true;
-            $data['success'] = true;
+            if ($user->access_level == 0 ) {
+                $data['registered'] = false;
+                $data['success'] = false;
+                $data['message'] = "Your registration is <a class='pending' href='pending.php' onclick=>pending</a> approval,<br> you will be notified by email<br> when it has been approved.";
+
+            }  else {
+                $_SESSION['f_name'] = $user->f_name;
+                $_SESSION['l_name'] = $user->l_name;
+                $_SESSION['email'] = $user->email;
+                $_SESSION['level'] = $user->access_level;
+                $data['registered'] = true;
+                $data['success'] = true;
+            }
             if ($user->access_level > 7) {
                 $data['redirect'] = 'admin_dashboard.php';
             } else {

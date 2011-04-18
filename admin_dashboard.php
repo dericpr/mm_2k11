@@ -23,6 +23,13 @@ if ( $_POST )
          <script>
         $(document).ready(function() {
             // script shit here if need be
+            $.post("check_unprocessed.php",
+           function(data) {
+               if (data.count > 0 ) {
+                $(".process").html("<button style='background-color:red; color:whitesmoke'>" + data.count +"</button>").fadeIn();
+               }
+
+           }, 'json');
         });
         </script>
          <script type="text/javascript" src="javascript_core.js"></script>
@@ -68,29 +75,7 @@ if ( $_POST )
       <div class="mainbar">
         <div class="article">
 
-          <h2><span>Template</span> License</h2>
-          <div class="clr"></div>
-          <p>Posted on 18. Sep, 2015 by Sara in Filed under templates, internet, with Comments 18<img src="images/img_1.jpg" width="613" height="193" alt="" /> </p>
-          <div class="clr"></div>
-          <p>This is a free CSS website template by FreeWebsiteTemplateZ.com. This work is distributed under the <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 License</a>, which means that you are free to use it for any personal or commercial purpose provided you credit me in the form of a link back to FreeWebsiteTemplateZ.com.</p>
-
-          <p>Maecenas dignissim mauris in arcu congue tincidunt. Vestibulum elit nunc, accumsan vitae faucibus vel, scelerisque a quam. Aenean at metus id elit bibendum faucibus. Curabitur ultrices ante nec neque consectetur a aliquet libero lobortis. Ut nibh sem, pellentesque in dictum eu, convallis blandit erat. Cras vehicula tellus nec purus sagittis id scelerisque risus congue. Quisque sed semper massa. Donec id lacus mauris, vitae pretium risus. Fusce sed tempor erat. </p>
-          <p><a href="#">Read more </a></p>
-        </div>
-        <div class="article">
-          <h2><span>Aliquam Risus</span> Justo</h2>
-          <div class="clr"></div>
-
-          <p>Posted on 18. Sep, 2015 by Sara in Filed under templates, internet, with Comments 18</p>
-          <img src="images/img_2.jpg" width="613" height="193" alt="" />
-          <div class="clr"></div>
-          <p>Pellentesque posuere enim et ipsum dignissim convallis. Proin quis molestie mauris. Nunc eget quam at nulla tempus tincidunt quis a mi. Aliquam ornare turpis non tellus molestie imperdiet. Phasellus sit amet neque vitae purus venenatis hendrerit. Phasellus non mi ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse potenti. Aenean vel varius sapien. Etiam leo quam, sodales vel ullamcorper ut, viverra a risus.</p>
-          <p>Maecenas dignissim mauris in arcu congue tincidunt. Vestibulum elit nunc, accumsan vitae faucibus vel, scelerisque a quam. Aenean at metus id elit bibendum faucibus. Curabitur ultrices ante nec neque consectetur a aliquet libero lobortis. Ut nibh sem, pellentesque in dictum eu, convallis blandit erat. Cras vehicula tellus nec purus sagittis id scelerisque risus congue. Quisque sed semper massa. Donec id lacus mauris, vitae pretium risus. Fusce sed tempor erat. </p>
-          <p><a href="#">Read more </a></p>
-        </div>
-
-        <div class="article" style="padding:5px 20px 2px 20px;">
-          <p>Page 1 of 2 <span class="butons"><a href="#">3</a><a href="#">2</a> <a href="#" class="active">1</a></span></p>
+         
         </div>
       </div>
       <div class="sidebar">
@@ -103,12 +88,13 @@ if ( $_POST )
 
           <div class="clr"></div>
           <ul class="sb_menu">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">TemplateInfo</a></li>
-            <li><a href="#">Style Demo</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Archives</a></li>
-
+            <table border="1">
+            <tr><td><li><a href="#">Users</a><td width="90%"><h3 class="process">"&nbsp &nbsp</h3></li>
+            <tr><td><li><a href="#">TemplateInfo</a></li>
+            <tr><td><li><a href="#">Style Demo</a></li>
+           <tr><td> <li><a href="#">Blog</a></li>
+           <tr><td> <li><a href="#">Archives</a></li>
+            </table>
           </ul>
         </div>
         <div class="gadget">

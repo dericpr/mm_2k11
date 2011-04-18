@@ -16,7 +16,6 @@ if ( $_POST )
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <LINK href="mm2k11.css" rel="stylesheet" type="text/css">
         <title>Murder Mystery Party - 2011</title>
-
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/arial.js"></script>
@@ -24,25 +23,20 @@ if ( $_POST )
          <script>
         $(document).ready(function() {
             $('#error\\S*').hide();
-            
-            $('form[name=loginForm]').submit(function() {
-                $('#errorConsole').slideUp();
-                $('#errorUser').fadeOut();
-                $('#errorPass').fadeOut();
-                $('.pending').live('click', function() {
-                  $('.article:first').load("pending.html");
-                  return false;
-                });
-                $.post("login.php", {email: $('[name=email]').val(),
+            $('form[name=registerForm]').submit(function() {
+              //  $('#errorConsole').slideUp();
+               // $('#errorUser').fadeOut();
+               // $('#errorPass').fadeOut();
+
+                $.post("doRegister.php", {email: $('[name=email]').val(),
+                                     f_name: $('[name=f_name]').val(),
+                                     l_name: $('[name=l_name]').val(),
+                                     gender: $('[name=gender]').val(),
                                      password: $('[name=password]').val()},
                 function(data) {
-                    if (!data.registered)
-                    {
-                        $("#errorConsole").html(data.message).fadeIn();
-                        
-                    }
                     if(data.success)
                     {
+                        alert("Login");
                         location.href=data.redirect;
                     }
                     else
@@ -66,7 +60,6 @@ if ( $_POST )
             });
         });
         </script>
-
          <script type="text/javascript" src="javascript_core.js"></script>
     </head>
 <?php
@@ -109,11 +102,80 @@ if ( $_POST )
     <div class="content_resize">
       <div class="mainbar">
         <div class="article">
-          <h2><span>Welcome</span> </h2>
+
+          <h2><span>Register</span> </h2>
           <div class="clr"></div>
           <p></p>
           <div class="clr"></div>
-         <p>This is some generic content just cause I can for now.  Still working on features, this will be dynamic at some point.  Yeah, I'm that awesome.
+          <p class="doForm">
+              Here's your chance, register now for the greatest party ever.
+              <table>
+                <form method='post' name='registerForm' action='index.php'>
+                    <tr>
+                        <td class="doForm">
+                            First Name
+                        </td>
+                        <td>
+                            <input type='text' name='f_name' size="48"/><br />
+                        </td>
+                        <td>
+                            <div id='errorUser'></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="doForm">
+                            Last Name
+                        </td>
+                        <td>
+                            <input type='text' name='l_name' size="48"/><br />
+                        </td>
+                        <td>
+                            <div id='errorUser'></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="doForm">
+                            Email
+                        </td>
+                        <td>
+                            <input type='text' name='email' size="48"/><br />
+                        </td>
+                        <td>
+                            <div id='errorUser'></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="doForm">
+                            Gender
+                        </td>
+                        <td class="doForm">
+                            <input type='radio' name='gender' val="1" >Female<br />
+                            <input type='radio' name='gender' val="0" >Male<br />
+                            <input type='radio' name='gender' val="2" >N/A<br />
+                        </td>
+                        <td>
+                            <div id='errorUser'></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="doForm">
+                            Password
+                        </td>
+                    <td>
+                        <input type='password' name='password' size="48"/><br />
+                    </td>
+                    <td>
+                        <div id='errorPass'></div>
+                    </td>
+                    </tr>
+                     <tr>
+                         <td>
+                            <input type='submit' value='Register'/>
+                         </td>
+                     <tr>
+                </form>
+                </table>
+          </p>
          
         </div>
        
@@ -184,7 +246,7 @@ if ( $_POST )
           <div class="clr"></div>
           <ul class="ex_menu">
             <li><a href="http://www.awesomeottawa.com/" target="_blank">Awesome Ottawa</a><br />
-              Serving Ottawa with Awesome!</li>
+              Over 6,000+ Premium Web Templates</li>
           </ul>
         </div>
       </div>

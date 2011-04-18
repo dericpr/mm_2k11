@@ -215,6 +215,7 @@ a.rm, a.com {
 .content .mainbar .article {
 	margin:0 0 20px 0;
 	padding:30px 20px;
+        color: #767676;
 	width:610px;
 }
 .content .mainbar .article span.butons a {
@@ -394,3 +395,8 @@ ol li textarea {
 ol li .send {
 	margin:16px 0 0 0;
 }
+
+.doForm {
+    color: #393939;
+}
+
