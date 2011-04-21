@@ -10,6 +10,7 @@ if ( $_POST )
 {
     // process the login form
 }
+
 ?>
 <html>
     <head>
@@ -43,6 +44,7 @@ if ( $_POST )
                     }
                     if(data.success)
                     {
+
                         location.href=data.redirect;
                     }
                     else

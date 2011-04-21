@@ -20,47 +20,87 @@ if ( $_POST )
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/arial.js"></script>
         <script type="text/javascript" src="js/cuf_run.js"></script>
-         <script>
-        $(document).ready(function() {
-            $('#error\\S*').hide();
-            $('form[name=registerForm]').submit(function() {
-              //  $('#errorConsole').slideUp();
-               // $('#errorUser').fadeOut();
-               // $('#errorPass').fadeOut();
+        <script type="text/javascript" src="js/jquery.validate.min.js"</script>
+        <script type="text/javascript" src="js/additional-methods.min.js"</script>
+<script type="text/javascript">
 
-                $.post("doRegister.php", {email: $('[name=email]').val(),
-                                     f_name: $('[name=f_name]').val(),
-                                     l_name: $('[name=l_name]').val(),
-                                     gender: $('[name=gender]').val(),
-                                     password: $('[name=password]').val()},
+           
+
+ $().ready(function() {
+        $('#error\\S*').hide();
+         $("#signupForm").submit(function() {
+                $.post("doRegister.php", {email: $("#email").val(),
+                                          password: $('#password').val(),
+                                          gender: $("input[name='gender']:checked").val(),
+                                          f_name: $('#f_name').val(),
+                                          l_name: $('#l_name').val()},
                 function(data) {
-                    if(data.success)
+
+                    if ( data.mail_sent)
+                        {
+                            $("#mailSent").html("mailSent").fadeIn();
+                        }
+                    if (!data.registered)
                     {
-                        alert("Login");
-                        location.href=data.redirect;
+                        $("#errorConsole").html(data.message).fadeIn();
                     }
                     else
                     {
                         $("#errorConsole").html(data.message).fadeIn();
-                        if (data.user)
-                        {
-                            $('#errorUser').html("Valid");
-
-                        }
-                        else
-                        {
-                            $('#errorUser').html("<img src='images/action_delete.png'></img>").fadeIn();
-                        }
                     }
 
                 }, 'json');
-
-
                 return false;
-            });
-        });
-        </script>
-         <script type="text/javascript" src="javascript_core.js"></script>
+		});
+
+	// validate signup form on keyup and submit
+	$("#signupForm").validate({
+		rules: {
+			f_name: "required",
+			l_name: "required",
+			
+			password: {
+				required: true,
+				minlength: 5
+			},
+			confirm_password: {
+				required: true,
+				minlength: 5,
+				equalTo: "#password"
+			},
+			email: {
+				required: true,
+				email: true
+			},
+                        gender: {
+                            required: true
+                        }
+		},
+		messages: {
+			f_name: "Please enter your firstname",
+			l_name: "Please enter your lastname",
+			
+			password: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 5 characters long"
+			},
+			confirm_password: {
+				required: "Please provide a password",
+				minlength: "Your password must be at least 5 characters long",
+				equalTo: "Please enter the same password as above"
+			},
+			email: "Please enter a valid email address",
+                        gender: "Please select a gender or choose not to specify"
+		}
+	});
+       
+            
+        
+ });
+   
+
+    </script>
+       
     </head>
 <?php
 
@@ -107,75 +147,44 @@ if ( $_POST )
           <div class="clr"></div>
           <p></p>
           <div class="clr"></div>
-          <p class="doForm">
-              Here's your chance, register now for the greatest party ever.
-              <table>
-                <form method='post' name='registerForm' action='index.php'>
-                    <tr>
-                        <td class="doForm">
-                            First Name
-                        </td>
-                        <td>
-                            <input type='text' name='f_name' size="48"/><br />
-                        </td>
-                        <td>
-                            <div id='errorUser'></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="doForm">
-                            Last Name
-                        </td>
-                        <td>
-                            <input type='text' name='l_name' size="48"/><br />
-                        </td>
-                        <td>
-                            <div id='errorUser'></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="doForm">
-                            Email
-                        </td>
-                        <td>
-                            <input type='text' name='email' size="48"/><br />
-                        </td>
-                        <td>
-                            <div id='errorUser'></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="doForm">
-                            Gender
-                        </td>
-                        <td class="doForm">
-                            <input type='radio' name='gender' val="1" >Female<br />
-                            <input type='radio' name='gender' val="0" >Male<br />
-                            <input type='radio' name='gender' val="2" >N/A<br />
-                        </td>
-                        <td>
-                            <div id='errorUser'></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="doForm">
-                            Password
-                        </td>
-                    <td>
-                        <input type='password' name='password' size="48"/><br />
-                    </td>
-                    <td>
-                        <div id='errorPass'></div>
-                    </td>
-                    </tr>
-                     <tr>
-                         <td>
-                            <input type='submit' value='Register'/>
-                         </td>
-                     <tr>
-                </form>
-                </table>
-          </p>
+          <div id="mailSent"></div>
+          <div id="errorConsole"></div>
+          <form class="cmxform" id="signupForm" name="signupForm" method="post" action="register.php">
+	<fieldset>
+		<p>
+			<label for="firstname">Firstname</label><br/>
+			<input id="f_name" name="f_name" />
+		</p>
+		<p>
+			<label for="lastname">Lastname</label><br/>
+			<input id="l_name" name="l_name" />
+		</p>
+                <p>
+			<label for="email">Email</label><br/>
+			<input id="email" name="email" />
+		</p>
+                <p>
+                    <label for="gender">Gender</label><br/>
+                    <input type="radio" value=0 id="gender" name="gender" />Male<br />
+                    <input type="radio" value=1 id="gender" name="gender" />Female<br />
+                    <input type="radio" value=2 id="gender" name="gender" />Not Important<br />
+                </p>
+		<p>
+			<label for="password">Password</label><br/>
+			<input id="password" name="password" type="password" />
+		</p>
+
+		<p>
+			<label for="confirm_password">Confirm password</label><br/>
+			<input id="confirm_password" name="confirm_password" type="password" />
+		</p>
+		
+
+		<p>
+                    <input type="submit" value="Register"/>
+                </p>
+        </fieldset>
+          </form>
          
         </div>
        
