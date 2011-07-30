@@ -27,26 +27,47 @@ if ( $_POST )
            
 
  $().ready(function() {
+     $("#guest").change( function() {
+
+     if ( $(this).attr("checked")) {
+     $("#guest_details").html("<p><label for='gf_name'>Guest First Name</label><br/><input id='gf_name' name='gf_name' /></p><p><label for='gl_name'>Guest Last name</label><br/><input id='gl_name' name='gl_name' /></p><p><label for='gemail'>Guest Email</label><br/><input id='gemail' name='gemail' /></p><p><label for='ggender'>Guest Gender</label><br/><input type='radio' value=0 id='ggender' name='ggender' />Male<br /><input type='radio' value=1 id='ggender' name='ggender' />Female<br /><input type='radio' value=2 id='ggender' name='ggender' />Not Important<br /></p>").fadeIn();
+     return;
+    } else {
+        $("#guest_details").fadeOut();
+    }
+})
         $('#error\\S*').hide();
+        $('#Console\\S*').hide();
          $("#signupForm").submit(function() {
                 $.post("doRegister.php", {email: $("#email").val(),
                                           password: $('#password').val(),
                                           gender: $("input[name='gender']:checked").val(),
                                           f_name: $('#f_name').val(),
-                                          l_name: $('#l_name').val()},
+                                          l_name: $('#l_name').val(),
+                                          invite_code: $('#invite_code').val(),
+                                          gemail: $("#gemail").val(),
+                                          gf_name: $("#gf_name").val(),
+                                          gl_name: $("#gl_name").val(),
+                                          ggender: $("#ggender").val()},
                 function(data) {
 
-                    if ( data.mail_sent)
-                        {
-                            $("#mailSent").html("mailSent").fadeIn();
-                        }
+                   // if ( data.mail_sent)
+                 //       {
+                   //         $("#mailSent").html("mailSent").fadeIn();
+                  //          $("#Console").fadeOut
+
+                 //       }
                     if (!data.registered)
                     {
+                        $("#Console").fadeOut();
                         $("#errorConsole").html(data.message).fadeIn();
+                        
                     }
                     else
                     {
-                        $("#errorConsole").html(data.message).fadeIn();
+                        $("#errorConsole").fadeOut();
+                        $("#Console").html(data.message).fadeIn();
+                        
                     }
 
                 }, 'json');
@@ -77,8 +98,8 @@ if ( $_POST )
                         }
 		},
 		messages: {
-			f_name: "Please enter your firstname",
-			l_name: "Please enter your lastname",
+			f_name: "Please enter your first name",
+			l_name: "Please enter your last name",
 			
 			password: {
 				required: "Please provide a password",
@@ -87,7 +108,7 @@ if ( $_POST )
 			confirm_password: {
 				required: "Please provide a password",
 				minlength: "Your password must be at least 5 characters long",
-				equalTo: "Please enter the same password as above"
+				equalTo: "Password's don't match"
 			},
 			email: "Please enter a valid email address",
                         gender: "Please select a gender or choose not to specify"
@@ -145,18 +166,21 @@ if ( $_POST )
 
           <h2><span>Register</span> </h2>
           <div class="clr"></div>
-          <p></p>
+          <p>Welcome to the Murder Mystery Party registration page.  You've probably found your way here through an invite provided by one of our organizers.
+          when you register you will be asked to supply an invite code which should have been supplied to you by the organizer who invited you.  If they failed
+          to provide you with a valid Invite Code you won't be able to register.  If you have any questions or concerns please contact <a href="mailto:dericpr@gmail.com">Deric</a></p>
           <div class="clr"></div>
           <div id="mailSent"></div>
-          <div id="errorConsole"></div>
+          <div id="errorConsole" style="color:red;"></div>
+          <div id="Console" style="color:blue;"></div>
           <form class="cmxform" id="signupForm" name="signupForm" method="post" action="register.php">
 	<fieldset>
 		<p>
-			<label for="firstname">Firstname</label><br/>
+			<label for="firstname">First Name</label><br/>
 			<input id="f_name" name="f_name" />
 		</p>
 		<p>
-			<label for="lastname">Lastname</label><br/>
+			<label for="lastname">Last name</label><br/>
 			<input id="l_name" name="l_name" />
 		</p>
                 <p>
@@ -178,8 +202,16 @@ if ( $_POST )
 			<label for="confirm_password">Confirm password</label><br/>
 			<input id="confirm_password" name="confirm_password" type="password" />
 		</p>
-		
+		<p>
+			<label for="code">Invite Code</label><br/>
+			<input id="invite_code" name="invite_code" />
+		</p>
 
+                 <p>
+                    <label for="gender">Guest</label>
+                    <input type="checkbox" id="guest" name="guest" /><br />
+                    <div id="guest_details"></div>
+                </p>
 		<p>
                     <input type="submit" value="Register"/>
                 </p>
