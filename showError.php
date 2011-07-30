@@ -15,11 +15,12 @@ $users = $db->get_results($sql);
 print ("SQL : $sql<BR>\n");
 if ( $users ) {
     print "<table border=1>";
-    print ("<th>Error<th>Date");
+    print ("<th>ID<th>Error<th>Date");
    foreach ( $users as $user )
     {
        $datetime = date('l jS \of F Y h:i:s A',$user->date);
-       print ("<tr><td>".base64_decode($user->error));
+       print("<tr><td>". $user->id);
+       print ("<td>".base64_decode($user->error));
        print ("<td>".$datetime);
     }
     print("</table>");

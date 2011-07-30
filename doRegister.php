@@ -11,10 +11,44 @@ $f_name=htmlspecialchars($_POST['f_name'],ENT_QUOTES);
 $l_name=htmlspecialchars($_POST['l_name'],ENT_QUOTES);
 $email=htmlspecialchars($_POST['email'],ENT_QUOTES);
 $gender=$_POST['gender'];
+
+$gf_name=htmlspecialchars($_POST['gf_name'],ENT_QUOTES);
+$gl_name=htmlspecialchars($_POST['gl_name'],ENT_QUOTES);
+$gemail=htmlspecialchars($_POST['gemail'],ENT_QUOTES);
+$ggender=$_POST['ggender'];
+
 $pass=sha1($_POST['password']);
+$gpass=sha1($email);
 //get the posted values
 $user_name=htmlspecialchars($_POST['email'],ENT_QUOTES);
-$pass=sha1($_POST['password']);
+$invite=htmlspecialchars($_POST['invite_code'], ENT_QUOTES);
+
+// check if the invite code is valid.
+//
+$check_code = "SELECT code from invite_codes";
+$invite_codes = $db->get_results($check_code);
+$codes = array("");
+foreach ($invite_codes as $code )
+{
+   array_push($codes, $code->code);
+}
+
+if ( !in_array($invite,  $codes, false)) {
+    $data['message'] .= "Invalid invite code supplied, please try again with a valid invite code";
+    $data['registered'] = false;
+
+    // stuff the error into the error table
+    $err_message = "Invalid invite code supplied for user ".$email. " -  ". $invite;
+    $error_data = base64_encode($err_message);
+    $time = time();
+    $sql = "INSERT INTO error(error,date) values(\"$error_data\", $time)";
+    $db->query($sql);
+    $data['error_id'] = $db->insert_id;
+   
+    $db->close;
+    echo json_encode($data);
+} else {
+
 //now validating the username and password
 $sql = "INSERT into user(f_name,l_name,email,password,gender) VALUES(\"$f_name\", \"$l_name\", \"$email\", \"$pass\", $gender)";
 $users = $db->query($sql);
@@ -22,6 +56,17 @@ $users = $db->query($sql);
 if ( $db->rows_affected > 0 ) {
     $data['registered'] = true;
     $data['message'] = "Successfully added user $email";
+
+    //now validating the guest username and password
+    if ( strlen($gemail) > 0 ) {
+        $sql = "INSERT into user(f_name,l_name,email,password,gender) VALUES(\"$gf_name\", \"$gl_name\", \"$gemail\",\"$gpass\", $ggender)";
+        $users = $db->query($sql);
+        if ( $db->rows_affected > 0 ) {
+            $data['message'] .= "<br>Successfully added guest user : $gemail";
+        } else {
+            $data['message'] .= "<br>Failed to add guest user : $gemail";
+        }
+    }
      // multiple recipients
     $to  = $email;
     // subject
@@ -41,7 +86,18 @@ if ( $db->rows_affected > 0 ) {
       <br>
       for the record here is a copy of your password in case you ever forget it.<br>
       password : '. $_POST['password']. '
-      <p>
+      <br>';
+    
+    if ( strlen($gemail) > 0 ) {
+        $message .= "You indicated that you will be bringing a guest.  Please pass along the following information to them so they can login and participate.
+            <br>
+            login : $gemail
+            password : $email
+            <br>
+            ";
+    }
+
+     $message .= ' <p>
       Your Murder Mystery Team
       </p>
     </body>
@@ -70,16 +126,18 @@ if ( $db->rows_affected > 0 ) {
     $data['registered'] = false;
    
     // stuff the error into the error table
-    $error_data = base64_encode($sql);
+    $err_message = "Unable to insert user with the following sql <BR><BR> ".
+    $err_message .= $sql;
+    $error_data = base64_encode($err_message);
     $time = time();
     $sql = "INSERT INTO error(error,date) values(\"$error_data\", $time)";
-    print("SQL : $sql<BR>\n");
     $db->query($sql);
     $data['error_id'] = $db->insert_id;
-    $message = "Failed to register user $email : Please contact dericpr@gmail.com and reference id : $db->insert_id";
+    $message = "Failed to register user $email : Please contact dericpr@gmail.com and provide the following info<br> Error Reference id : $db->insert_id";
     $data['message'] = $message;    
 }
+
 $db->close;
 echo json_encode($data);
-
+}
 ?>
