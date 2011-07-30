@@ -82,16 +82,14 @@ if ( $_POST )
 
     <div class="header_resize">
       <div class="logo">
-        <h1><a href="index.html">Jack <span>A</span>ttack</a><small> Murder Mystery 2011</small></h1>
+        <h1><a href="index.php">Jack <span>A</span>ttack</a><small> Murder Mystery 2011</small></h1>
       </div>
       <div class="menu_nav">
                 <ul>
 
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="support.html">Support</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li class="active"><a href="index.php">Home</a></li>
+           <li ><a href="register.php">Register</a></li>
+          
         </ul>
 
              <div class="clr"></div>
@@ -115,7 +113,9 @@ if ( $_POST )
           <div class="clr"></div>
           <p></p>
           <div class="clr"></div>
-         <p>This is some generic content just cause I can for now.  Still working on features, this will be dynamic at some point.  Yeah, I'm that awesome.
+         <p>
+             We are very close to setting a date for the upcoming party, stay tuned to this space for more details as they become available.  We're looking at sometime in September or October and are just trying find a time that works for everyone.
+         </p>
          
         </div>
        
@@ -196,20 +196,13 @@ if ( $_POST )
   <div class="fbg">
     <div class="fbg_resize">
     
-      <div class="col c1">
-
-        <h2><span>Image Gallery</span></h2>
-        <a href="#"><img src="images/gallery_1.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_2.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_3.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_4.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_5.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_6.jpg" width="58" height="58" alt="" /></a> </div>
-      <div class="col c2">
-        <h2><span>Not sure what we'll put here</span></h2>
-        <p>something witty I imagine<br />
-
-          Yup ... witty.</p>
-      </div>
-    
+        
       <div class="col c3">
         <h2><span>Contact</span></h2>
-        <p>Really?  Well email, <a href="mailto:dericpr@gmail.com">Deric</a> Usually works.  You are probably already having a beer with Jack, so you won't need to contact him."</p>
+        <p>
+            Website Problems : <a href="mailto:dericpr@gmail.com">Deric</a><br>
+            Party Details : <a href="mailto:gregwjack@videotron.ca">Greg</a>
+        </p>
 
       </div>
       <div class="clr"></div>

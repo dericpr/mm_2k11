@@ -134,16 +134,14 @@ if ( $_POST )
 
     <div class="header_resize">
       <div class="logo">
-        <h1><a href="index.html">Jack <span>A</span>ttack</a><small> Murder Mystery 2011</small></h1>
+        <h1><a href="index.php">Jack <span>A</span>ttack</a><small> Murder Mystery 2011</small></h1>
       </div>
       <div class="menu_nav">
                 <ul>
 
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="support.html">Support</a></li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li ><a href="index.php">Home</a></li>
+            <li class="active"><a href="register.php">Register</a></li>
+
         </ul>
 
              <div class="clr"></div>
