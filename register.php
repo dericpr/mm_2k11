@@ -254,8 +254,7 @@ if ( $_POST )
           <h2><span>Sponsors</span></h2>
           <div class="clr"></div>
           <ul class="ex_menu">
-            <li><a href="http://www.awesomeottawa.com/" target="_blank">Awesome Ottawa</a><br />
-              Over 6,000+ Premium Web Templates</li>
+            <li><a href="http://www.awesomeottawa.com/" target="_blank">Awesome Ottawa</a></li>
           </ul>
         </div>
       </div>

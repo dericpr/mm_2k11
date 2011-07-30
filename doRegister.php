@@ -1,10 +1,10 @@
 <?php
 $data['registered'] = false;
-function sendmail()
+function sendmail($email_acct, $f_name)
 {
     global $data;
     // multiple recipients
-    $to  = $_SESSION['email'];
+    $to  = $email_acct;
     // subject
     $subject = 'Registration Complete, waiting for approval.';
 
@@ -12,14 +12,16 @@ function sendmail()
     $message = '
     <html>
     <head>
-      <title>Congratulations!  You are now registered.</title>
+      <title>Congratulations '. $f_name. '!  You are now registered.</title>
     </head>
     <body>
-      <p>Now we just need to wait for one of the admins to login and turns some knobs and push some buttons to get your account all setup.</p>
-      <p>In the meantime, you may want to start thinking about what historical figure you\'d like to play and planning your costume for the big event</p>
-      <p>You will receive another email when your registration has been processed.  Thanks for signing up!</p>
+      <p>Now we just need to wait for one of the admins to login and turn some knobs and push some buttons to get your account all setup.
+      In the meantime, you may want to start thinking about what historical figure you\'d like to play and planning your costume for the big event
+      You will receive another email when your registration has been processed.  Thanks for signing up!
       <br>
       <br>
+      for the record here is a copy of your password in case you ever forget it.<br>
+      password : '. $password. '
       <p>
       Your Murder Mystery Team
       </p>
@@ -67,6 +69,7 @@ $users = $db->query($sql);
 if ( $db->rows_affected > 0 ) {
     $data['registered'] = true;
     $data['message'] = "Successfully added user $email";
+    send_mail($email, $f_name, $_POST['password']);
    
 } else {
     // no user with that name

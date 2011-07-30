@@ -88,12 +88,13 @@ if ( $_POST )
 
           <div class="clr"></div>
           <ul class="sb_menu">
-            <table border="1">
-            <tr><td><li><a href="#">Users</a><td width="90%"><h3 class="process">"&nbsp &nbsp</h3></li>
+            <table border="0">
+            <tr><td><li><a href="#">Users</a><td></li>
             <tr><td><li><a href="#">TemplateInfo</a></li>
             <tr><td><li><a href="#">Style Demo</a></li>
            <tr><td> <li><a href="#">Blog</a></li>
            <tr><td> <li><a href="#">Archives</a></li>
+           <tr><td>Unprocessed <li class="process">&nbsp &nbsp</h3></li>
             </table>
           </ul>
         </div>
@@ -101,21 +102,8 @@ if ( $_POST )
           <h2><span>Sponsors</span></h2>
           <div class="clr"></div>
           <ul class="ex_menu">
-            <li><a href="http://www.dreamtemplate.com">DreamTemplate</a><br />
-              Over 6,000+ Premium Web Templates</li>
-
-            <li><a href="http://www.templatesold.com/">TemplateSOLD</a><br />
-              Premium WordPress &amp; Joomla Themes</li>
-            <li><a href="http://www.imhosted.com">ImHosted.com</a><br />
-              Affordable Web Hosting Provider</li>
-            <li><a href="http://www.myvectorstore.com">MyVectorStore</a><br />
-
-              Royalty Free Stock Icons</li>
-            <li><a href="http://www.evrsoft.com">Evrsoft</a><br />
-              Website Builder Software &amp; Tools</li>
-            <li><a href="http://www.csshub.com/">CSS Hub</a><br />
-              Premium CSS Templates</li>
-
+            <li><a href="http://www.awesomeottawa.com/" target="_blank">Awesome Ottawa</a><br />
+              Serving Ottawa with Awesome!</li>
           </ul>
         </div>
       </div>
