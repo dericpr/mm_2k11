@@ -23,7 +23,7 @@ if ( $db->rows_affected > 0 ) {
     $data['registered'] = true;
     $data['message'] = "Successfully added user $email";
      // multiple recipients
-    $to  = $email_acct;
+    $to  = $email;
     // subject
     $subject = 'Registration Complete, waiting for approval.';
 
@@ -40,7 +40,7 @@ if ( $db->rows_affected > 0 ) {
       <br>
       <br>
       for the record here is a copy of your password in case you ever forget it.<br>
-      password : '. $password. '
+      password : '. $_POST['password']. '
       <p>
       Your Murder Mystery Team
       </p>
@@ -53,9 +53,8 @@ if ( $db->rows_affected > 0 ) {
     $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
     // Additional headers
-    $headers .= 'To: '.$f_name.' <'.$email.'>' . "\r\n";
     $headers .= 'From: Murder Mystery Admin <admin@mysteryparty.net>' . "\r\n";
-    $headers .= 'Bcc: dericpr@gmail.com' . "\r\n";
+    $headers .= 'cc: Murder Mystery Admin <dericpr@gmail.com>' . "\r\n";
 
     // Mail it
     $mail_sent = mail($to, $subject, $message, $headers);
