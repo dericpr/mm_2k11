@@ -25,12 +25,11 @@ $invite=htmlspecialchars($_POST['invite_code'], ENT_QUOTES);
 
 // check if the invite code is valid.
 //
-$check_code = "SELECT code,used from invite_codes where code='$invite'";
+$check_code = "SELECT code,code_used from invites where code='$invite'";
 $invite_codes = $db->get_row($check_code);
 
 if ( $invite_codes->used == 1 || $invite_codes->code == NULL ) {
 
-   
     $data['registered'] = false;
 
     // stuff the error into the error table
@@ -62,7 +61,7 @@ if ( $db->rows_affected > 0 ) {
     $data['registered'] = true;
     $data['message'] = "Successfully added user $email";
     // mark that code as used
-    $sql = "update invite_codes set used=1 where code = '". $invite."'";
+    $sql = "update invites set code_used=1 where code = '". $invite."'";
     $code_mark = $db->query($sql);
 
     //now validating the guest username and password

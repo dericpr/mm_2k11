@@ -133,6 +133,7 @@ if ( $_POST )
 -->
       <div class="sidebar">
          <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post">-->
+         <!--
          <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
         <input type="hidden" name="cmd" value="_xclick">
         <input type="hidden" name="business" value="F8A598Y3CMSEC">
@@ -149,14 +150,15 @@ if ( $_POST )
         <input type="hidden" name="cancel_return" value="http://mysteryparty.net/cancel.php">
         <input type="hidden" name="invoice" value="<?php echo $_SESSION['id'];?>">
         <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+         -->
         <!--<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
         <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-        -->
+        
         <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
 
         </form>
-
+-->
 
         <div class="search">
 
