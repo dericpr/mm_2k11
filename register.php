@@ -148,7 +148,7 @@ if ( $_GET['code'] )
           <div class="clr"></div>
           <p>Welcome to the Murder Mystery Party registration page.  You've probably found your way here through an invite provided by one of our organizers.
           when you register you will be asked to supply an invite code which should have been supplied to you by the organizer who invited you.  If they failed
-          to provide you with a valid Invite Code you won't be able to register.  If you have any questions or concerns please contact <a href="mailto:dericpr@gmail.com">Deric</a></p>
+          to provide you with a valid Invite Code you won't be able to register.  If you have any questions or concerns please contact <a href="mailto:dericpr@mysteryparty.net">Deric</a></p>
           <div class="clr"></div>
           <div id="mailSent"></div>
           <div id="errorConsole" style="color:red;"></div>

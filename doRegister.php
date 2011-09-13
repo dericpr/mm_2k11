@@ -25,7 +25,7 @@ $invite=htmlspecialchars($_POST['invite_code'], ENT_QUOTES);
 
 // check if the invite code is valid.
 //
-$check_code = "SELECT code,code_used from invites where code='$invite'";
+$check_code = "SELECT code,code_used as used from invites where code='$invite'";
 $invite_codes = $db->get_row($check_code);
 
 if ( $invite_codes->used == 1 || $invite_codes->code == NULL ) {
@@ -41,7 +41,7 @@ if ( $invite_codes->used == 1 || $invite_codes->code == NULL ) {
     $data['error_id'] = $db->insert_id;
  if ( $invite_codes->used == 1 ) {
     $data['message'] .= "That invite code has already been used.  If you feel this is an error, please send an email with your invitiation details to
-        <a href='mailto:dericpr@gmail.com?subject=Error%20registering%20with%20already%20used%20code&body=ErrorNumber:".$data['error_id']." '>Dericpr at gmail dot com</a>";
+        <a href='mailto:dericpr@mysteryparty.net?subject=Error%20registering%20with%20already%20used%20code&body=ErrorNumber:".$data['error_id']." '>Dericpr at gmail dot com</a>";
     $err_message = "Already used invite code supplied for user ".$email. " -  ". $invite;
 
 } else if ( $invite_codes->code == NULL ) {
@@ -118,7 +118,7 @@ if ( $db->rows_affected > 0 ) {
 
     // Additional headers
     $headers .= 'From: Murder Mystery Admin <admin@mysteryparty.net>' . "\r\n";
-    $headers .= 'cc: Murder Mystery Admin <dericpr@gmail.com>' . "\r\n";
+    $headers .= 'cc: Murder Mystery Admin <dericpr@mysteryparty.net>' . "\r\n";
 
     // Mail it
     $mail_sent = mail($to, $subject, $message, $headers);
@@ -141,7 +141,7 @@ if ( $db->rows_affected > 0 ) {
     $sql = "INSERT INTO error(error,date) values(\"$error_data\", $time)";
     $db->query($sql);
     $data['error_id'] = $db->insert_id;
-    $message = "Failed to register user $email : Please contact dericpr@gmail.com and provide the following info<br> Error Reference id : $db->insert_id";
+    $message = "Failed to register user $email : Please contact dericpr@mysteryparty.net and provide the following info<br> Error Reference id : $db->insert_id";
     $data['message'] = $message;    
 }
 
