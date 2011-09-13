@@ -6,6 +6,8 @@ include_once "shared/ez_sql_core.php";
 include_once "ez_sql.php";
 $db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
 session_start();
+if ( $_SESSION['level'] <= 0 )
+    echo header('location: index.php');
 if ( $_POST )
 {
     // process the login form

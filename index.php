@@ -185,36 +185,14 @@ if ( $_POST )
           <h2><span>Sponsors</span></h2>
           <div class="clr"></div>
           <ul class="ex_menu">
-            <li><a href="http://www.awesomeottawa.com/" target="_blank">Awesome Ottawa</a><br />
-              Serving Ottawa with Awesome!</li>
+              <?php echo file_get_contents("sponsers.html", true); ?>
           </ul>
         </div>
       </div>
       <div class="clr"></div>
     </div>
   </div>
-  <div class="fbg">
-    <div class="fbg_resize">
-    
-        
-      <div class="col c3">
-        <h2><span>Contact</span></h2>
-        <p>
-            Website Problems : <a href="mailto:dericpr@gmail.com">Deric</a><br>
-            Party Details : <a href="mailto:gregwjack@videotron.ca">Greg</a>
-        </p>
-
-      </div>
-      <div class="clr"></div>
-    </div>
-    <div class="footer">
-      <p class="lf">&copy; Copyright <a href="http://www.octapex.com">JackAttack!</a>.</p>
-      <p class="rf">Layout by Free <a href="http://www.freewebsitetemplatez.com/">Website Templates</a></p>
-     
-
-      <div class="clr"></div>
-    </div>
-  </div>
+  <?php echo file_get_contents("footer.html", true); ?>
 </div>
 
     </body>

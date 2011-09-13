@@ -30,7 +30,7 @@ if ( $_POST )
      $("#guest").change( function() {
 
      if ( $(this).attr("checked")) {
-     $("#guest_details").html("<p><label for='gf_name'>Guest First Name</label><br/><input id='gf_name' name='gf_name' /></p><p><label for='gl_name'>Guest Last name</label><br/><input id='gl_name' name='gl_name' /></p><p><label for='gemail'>Guest Email</label><br/><input id='gemail' name='gemail' /></p><p><label for='ggender'>Guest Gender</label><br/><input type='radio' value=0 id='ggender' name='ggender' />Male<br /><input type='radio' value=1 id='ggender' name='ggender' />Female<br /><input type='radio' value=2 id='ggender' name='ggender' />Not Important<br /></p>").fadeIn();
+     $("#guest_details").html("<p><label for='gf_name'>Guest First Name</label><br/><input id='gf_name' name='gf_name' /></p><p><label for='gl_name'>Guest Last name</label><br/><input id='gl_name' name='gl_name' /></p><p><label for='gemail'>Guest Email</label><br/><input id='gemail' name='gemail' /></p><p><label for='ggender'>Guest Gender</label><br/><input type='radio' value=0 id='ggender' name='ggender' />Male<br /><input type='radio' value=1 id='ggender' name='ggender' />Female<br /></p>").fadeIn();
      return;
     } else {
         $("#guest_details").fadeOut();
@@ -123,39 +123,10 @@ if ( $_POST )
     </script>
        
     </head>
-<?php
-
-
-?>
    
     <body>
-       <div class="main">
-  <div class="header">
-
-    <div class="header_resize">
-      <div class="logo">
-        <h1><a href="index.php">Jack <span>A</span>ttack</a><small> Murder Mystery 2011</small></h1>
-      </div>
-      <div class="menu_nav">
-                <ul>
-
-          <li ><a href="index.php">Home</a></li>
-            <li class="active"><a href="register.php">Register</a></li>
-
-        </ul>
-
-             <div class="clr"></div>
-            </div>
-
-        <div class="clr"></div>
-      <div class="header_img"><img src="images/main_img.png" alt="" width="298" height="233" />
-        <h2>The <span>best</span> Murder Mystery Productions! </h2>
-        <p>The most fun you can <i>legally</i> have with your pants on!</p>
-
-        <div class="clr"></div>
-      </div>
-    </div>
-  </div>
+<div class="main">
+<?php echo file_get_contents("header.html", true); ?>
   <div class="clr"></div>
   <div class="content">
     <div class="content_resize">
@@ -189,7 +160,6 @@ if ( $_POST )
                     <label for="gender">Gender</label><br/>
                     <input type="radio" value=0 id="gender" name="gender" />Male<br />
                     <input type="radio" value=1 id="gender" name="gender" />Female<br />
-                    <input type="radio" value=2 id="gender" name="gender" />Not Important<br />
                 </p>
 		<p>
 			<label for="password">Password</label><br/>
@@ -206,7 +176,7 @@ if ( $_POST )
 		</p>
 
                  <p>
-                    <label for="gender">Guest</label>
+                    <label for="gender">Please indicate if you will be bringing a Guest</label>
                     <input type="checkbox" id="guest" name="guest" /><br />
                     <div id="guest_details"></div>
                 </p>
@@ -284,42 +254,14 @@ if ( $_POST )
           <h2><span>Sponsors</span></h2>
           <div class="clr"></div>
           <ul class="ex_menu">
-            <li><a href="http://www.awesomeottawa.com/" target="_blank">Awesome Ottawa</a></li>
+              <?php echo file_get_contents("sponsers.html", true); ?>
           </ul>
         </div>
       </div>
       <div class="clr"></div>
     </div>
   </div>
-  <div class="fbg">
-    <div class="fbg_resize">
-    
-      <div class="col c1">
-
-        <h2><span>Image Gallery</span></h2>
-        <a href="#"><img src="images/gallery_1.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_2.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_3.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_4.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_5.jpg" width="58" height="58" alt="" /></a> <a href="#"><img src="images/gallery_6.jpg" width="58" height="58" alt="" /></a> </div>
-      <div class="col c2">
-        <h2><span>Not sure what we'll put here</span></h2>
-        <p>something witty I imagine<br />
-
-          Yup ... witty.</p>
-      </div>
-    
-      <div class="col c3">
-        <h2><span>Contact</span></h2>
-        <p>Really?  Well email, <a href="mailto:dericpr@gmail.com">Deric</a> Usually works.  You are probably already having a beer with Jack, so you won't need to contact him."</p>
-
-      </div>
-      <div class="clr"></div>
-    </div>
-    <div class="footer">
-      <p class="lf">&copy; Copyright <a href="http://www.octapex.com">JackAttack!</a>.</p>
-      <p class="rf">Layout by Free <a href="http://www.freewebsitetemplatez.com/">Website Templates</a></p>
-     
-
-      <div class="clr"></div>
-    </div>
-  </div>
+  <?php echo file_get_contents("footer.html", true); ?>
 </div>
 
     </body>

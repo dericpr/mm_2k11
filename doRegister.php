@@ -48,14 +48,17 @@ if ( !in_array($invite,  $codes, false)) {
     $db->close;
     echo json_encode($data);
 } else {
-
 //now validating the username and password
+
 $sql = "INSERT into user(f_name,l_name,email,password,gender) VALUES(\"$f_name\", \"$l_name\", \"$email\", \"$pass\", $gender)";
 $users = $db->query($sql);
 
 if ( $db->rows_affected > 0 ) {
     $data['registered'] = true;
     $data['message'] = "Successfully added user $email";
+    // mark that code as used
+    $sql = "INSERT into invite_codes(used) VALUES(1) where code = '". $invite."'";
+    $code_mark = $db->query($sql);
 
     //now validating the guest username and password
     if ( strlen($gemail) > 0 ) {
@@ -70,7 +73,7 @@ if ( $db->rows_affected > 0 ) {
      // multiple recipients
     $to  = $email;
     // subject
-    $subject = 'Registration Complete, waiting for approval.';
+    $subject = 'Murder Mystery Party 2011 Registration Complete.';
 
     // message
     $message = '
@@ -79,9 +82,8 @@ if ( $db->rows_affected > 0 ) {
       <title>Congratulations '. $f_name. '!  You are now registered.</title>
     </head>
     <body>
-      <p>Now we just need to wait for one of the admins to login and turn some knobs and push some buttons to get your account all setup.
-      In the meantime, you may want to start thinking about what historical figure you\'d like to play and planning your costume for the big event
-      You will receive another email when your registration has been processed.  Thanks for signing up!
+      <p>We will be processing registrations over the next few days and you will be contacted at this email address again when we have finalized everything.
+      At that time you will need to login and select your character and confirm your attendance by paying the registration fee.
       <br>
       <br>
       for the record here is a copy of your password in case you ever forget it.<br>
