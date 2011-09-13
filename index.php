@@ -78,32 +78,7 @@ if ( $_POST )
    
     <body>
        <div class="main">
-  <div class="header">
-
-    <div class="header_resize">
-      <div class="logo">
-        <h1><a href="index.php">Jack <span>A</span>ttack</a><small> Murder Mystery 2011</small></h1>
-      </div>
-      <div class="menu_nav">
-                <ul>
-
-          <li class="active"><a href="index.php">Home</a></li>
-           <li ><a href="register.php">Register</a></li>
-          
-        </ul>
-
-             <div class="clr"></div>
-            </div>
-
-        <div class="clr"></div>
-      <div class="header_img"><img src="images/main_img.png" alt="" width="298" height="233" />
-        <h2>The <span>best</span> Murder Mystery Productions! </h2>
-        <p>The most fun you can <i>legally</i> have with your pants on!</p>
-
-        <div class="clr"></div>
-      </div>
-    </div>
-  </div>
+ <?php echo file_get_contents("header.html", true); ?>
   <div class="clr"></div>
   <div class="content">
     <div class="content_resize">

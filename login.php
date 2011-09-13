@@ -28,6 +28,7 @@ if ( $users ) {
                 $_SESSION['l_name'] = $user->l_name;
                 $_SESSION['email'] = $user->email;
                 $_SESSION['level'] = $user->access_level;
+                $_SESSION['id'] = $user->user_id;
                 $data['registered'] = true;
                 $data['success'] = true;
             }

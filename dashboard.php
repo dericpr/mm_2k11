@@ -123,7 +123,41 @@ if ( $_POST )
         </div>
           -->
       </div>
+        <!--
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="GNFZNR3ZJ88B6">
+<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+-->
       <div class="sidebar">
+         <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post">-->
+         <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="F8A598Y3CMSEC">
+        <input type="hidden" name="lc" value="CA">
+        <input type="hidden" name="item_name" value="Murdery Mystery Payment">
+        <input type="hidden" name="item_number" value="10042">
+        <input type="hidden" name="amount" value="10.00">
+        <input type="hidden" name="currency_code" value="CAD">
+        <input type="hidden" name="button_subtype" value="services">
+        <input type="hidden" name="tax_rate" value="0.000">
+        <input type="hidden" name="shipping" value="0.00">
+        <input type="hidden" name="return" value="http://mysteryparty.net/paid.php">
+        <input type="hidden" name="rm" value="2">
+        <input type="hidden" name="cancel_return" value="http://mysteryparty.net/cancel.php">
+        <input type="hidden" name="invoice" value="<?php echo $_SESSION['id'];?>">
+        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+        <!--<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        -->
+        <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+
+        </form>
+
+
         <div class="search">
 
 <?php
@@ -161,7 +195,9 @@ if ( $_POST )
                      <tr>
                 </form>
                 </table>";
-        } 
+        } else {
+            echo "Logged in : ". $_SESSION['email'];
+        }
         ?>
         </div>
         <div class="gadget">

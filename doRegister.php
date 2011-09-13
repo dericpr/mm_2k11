@@ -25,25 +25,30 @@ $invite=htmlspecialchars($_POST['invite_code'], ENT_QUOTES);
 
 // check if the invite code is valid.
 //
-$check_code = "SELECT code from invite_codes";
-$invite_codes = $db->get_results($check_code);
-$codes = array("");
-foreach ($invite_codes as $code )
-{
-   array_push($codes, $code->code);
-}
+$check_code = "SELECT code,used from invite_codes where code='$invite'";
+$invite_codes = $db->get_row($check_code);
 
-if ( !in_array($invite,  $codes, false)) {
-    $data['message'] .= "Invalid invite code supplied, please try again with a valid invite code";
+if ( $invite_codes->used == 1 || $invite_codes->code == NULL ) {
+
+   
     $data['registered'] = false;
 
     // stuff the error into the error table
-    $err_message = "Invalid invite code supplied for user ".$email. " -  ". $invite;
+  
     $error_data = base64_encode($err_message);
     $time = time();
     $sql = "INSERT INTO error(error,date) values(\"$error_data\", $time)";
     $db->query($sql);
     $data['error_id'] = $db->insert_id;
+ if ( $invite_codes->used == 1 ) {
+    $data['message'] .= "That invite code has already been used.  If you feel this is an error, please send an email with your invitiation details to
+        <a href='mailto:dericpr@gmail.com?subject=Error%20registering%20with%20already%20used%20code&body=ErrorNumber:".$data['error_id']." '>Dericpr at gmail dot com</a>";
+    $err_message = "Already used invite code supplied for user ".$email. " -  ". $invite;
+
+} else if ( $invite_codes->code == NULL ) {
+    $data['message'] .= "An invalid Invite code was supplied, please try again and copy the invite code exactly as found in your email";
+    $err_message = "Invalid invite code supplied for user ".$email. " -  ". $invite;
+}
    
     $db->close;
     echo json_encode($data);
