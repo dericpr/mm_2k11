@@ -19,9 +19,9 @@ if ( $users ) {
             $data['login'] = true;
             $data['user'] = true;
             if ($user->access_level == 0 ) {
-                $data['registered'] = false;
-                $data['success'] = false;
-                $data['message'] = "Your registration is <a class='pending' href='pending.php' onclick=>pending</a> approval,<br> you will be notified by email<br> when it has been approved.";
+                $data['registered'] = true;
+                $data['success'] = true;
+                //$data['message'] = "S is still <a class='pending' href='locked.php' onclick=>locked</a>,<br> you will be notified by email<br> when sig is open.";
 
             }  else {
                 $_SESSION['f_name'] = $user->f_name;

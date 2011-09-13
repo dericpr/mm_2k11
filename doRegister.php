@@ -57,7 +57,7 @@ if ( $db->rows_affected > 0 ) {
     $data['registered'] = true;
     $data['message'] = "Successfully added user $email";
     // mark that code as used
-    $sql = "INSERT into invite_codes(used) VALUES(1) where code = '". $invite."'";
+    $sql = "update invite_codes set used=1 where code = '". $invite."'";
     $code_mark = $db->query($sql);
 
     //now validating the guest username and password
@@ -86,14 +86,16 @@ if ( $db->rows_affected > 0 ) {
       At that time you will need to login and select your character and confirm your attendance by paying the registration fee.
       <br>
       <br>
-      for the record here is a copy of your password in case you ever forget it.<br>
+      for the record here is a copy of your registration in case you ever forget it.<br>
+      login : '. $email. '<br>
       password : '. $_POST['password']. '
-      <br>';
+      <br><br>';
     
     if ( strlen($gemail) > 0 ) {
         $message .= "You indicated that you will be bringing a guest.  Please pass along the following information to them so they can login and participate.
             <br>
             login : $gemail
+            <br>
             password : $email
             <br>
             ";

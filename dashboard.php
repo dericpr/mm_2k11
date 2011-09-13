@@ -75,19 +75,53 @@ if ( $_POST )
       <div class="mainbar">
         <div class="article">
 
-          <h2><span>Article</span> One</h2>
-           <div class="clr"></div>
+            <h2><span>Date</span> Set</h2>
+          <div class="clr"></div>
+          <p>Posted on 12. Sep, 2011 by Deric </p>
+          <div class="clr"></div>
+          <p>On Saturday, October 15th - just in time for Hallowe'en - join over fifty of your closest friends at Ottawa's biggest and only free-form Murder Mystery Party.  There will be prizes, music and dancing, and, oh yeah, a murder!
+          </p>
+          <p>
+          The concept is simple.  Everyone gets a character with clues, and the party begins the moment you arrive.  It's not like the "out of the box" parties you may have attended in the past.  There is no scripting, and no actors.  Everyone plays in their own way.  You simply mingle with other guests to try and discover what they know, and at the end of the evening, guests vote on who they think figured the whole thing out.  The winner receives a prize.  There are also prizes for best costume, best character and more.
+          </p>
+          <p>
+          This is the fifth time we've planned a party like this, using our unique free-form system.  This year, our theme is dead historical figures, and for the first time, you get to pick your own character.  Thanks to the support of the <a href="http://www.awesomeottawa.com/" target="_blank">Awesome Ottawa</a> foundation, this year's party will be bigger and better than ever.  We're renting a space at the SAW gallery to accommodate more guests, and adding tons of new features and prizes.  There will be food available free of charge to guests.  Unfortunately, the terms of our liquor license prohibit us from telling you whether alcoholic beverages will be available for sale.
+          </p>
+          <p>
+          To help off-set the costs, we are charging guests $10.00 for tickets.  Your ticket secures your space and gets you in the door.  Custom characters are written for each guest, so it's important we know who is coming in advance.  The party is completely non-profit though - any money raised will be used to cover the costs of the party.  Additional money left over will be donated to the Ottawa Food Bank, to help those less fortunate.  Help is particularly needed around Thanksgiving, and we want to do our part and have a great time in the process.
+          </p>
+          <p>
+   
+   
+     <h3>LOCATION:  SAW Gallery, 67 Nicholas Street</h3>
+     <h3>TIME:  8 PM - 2 AM</h3>
+     <h3>TICKETS:  $10.00 </h3>
+        
+          <br>
+   
+        </p>
+        <p>
+        The Murder Mystery Party Organizing Committee
+        </p>
         </div>
+          <!--
         <div class="article">
-          <h2><span>Article</span> Two</h2>
+          <h2><span>Aliquam Risus</span> Justo</h2>
           <div class="clr"></div>
 
-          
+          <p>Posted on 18. Sep, 2015 by Sara in Filed under templates, internet, with Comments 18</p>
+          <img src="images/img_2.jpg" width="613" height="193" alt="" />
+          <div class="clr"></div>
+          <p>Pellentesque posuere enim et ipsum dignissim convallis. Proin quis molestie mauris. Nunc eget quam at nulla tempus tincidunt quis a mi. Aliquam ornare turpis non tellus molestie imperdiet. Phasellus sit amet neque vitae purus venenatis hendrerit. Phasellus non mi ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse potenti. Aenean vel varius sapien. Etiam leo quam, sodales vel ullamcorper ut, viverra a risus.</p>
+          <p>Maecenas dignissim mauris in arcu congue tincidunt. Vestibulum elit nunc, accumsan vitae faucibus vel, scelerisque a quam. Aenean at metus id elit bibendum faucibus. Curabitur ultrices ante nec neque consectetur a aliquet libero lobortis. Ut nibh sem, pellentesque in dictum eu, convallis blandit erat. Cras vehicula tellus nec purus sagittis id scelerisque risus congue. Quisque sed semper massa. Donec id lacus mauris, vitae pretium risus. Fusce sed tempor erat. </p>
+          <p><a href="#">Read more </a></p>
         </div>
+          
 
-        <!--<div class="article" style="padding:5px 20px 2px 20px;">
+        <div class="article" style="padding:5px 20px 2px 20px;">
           <p>Page 1 of 2 <span class="butons"><a href="#">3</a><a href="#">2</a> <a href="#" class="active">1</a></span></p>
-        </div>-->
+        </div>
+          -->
       </div>
       <div class="sidebar">
         <div class="search">
