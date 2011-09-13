@@ -6,9 +6,20 @@ include_once "shared/ez_sql_core.php";
 include_once "ez_sql.php";
 $db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
 session_start();
-if ( $_POST )
+if ( $_GET['code'] )
 {
-    // process the login form
+
+	$genurl = base64_encode("email=".$invite->email."&code=".$invite->code."&fname=".$invite->fname."&lname=".$invite->lname."&gender=".$invite->gender);
+	$decurl = base64_decode($_GET['code']);
+	list($email,$code,$fname,$lname,$gender) = explode("&", $decurl);
+	if ($gender == 0 ) {
+		$mselected = "checked";
+		$fselected = "";
+	} else {
+		$mselected = "";
+		$fselected = "checked";
+	}
+// process the login form
 }
 ?>
 <html>
@@ -146,20 +157,20 @@ if ( $_POST )
 	<fieldset>
 		<p>
 			<label for="firstname">First Name</label><br/>
-			<input id="f_name" name="f_name" />
+			<input id="f_name" name="f_name" value="<?php echo $fname; ?>" />		
 		</p>
 		<p>
 			<label for="lastname">Last name</label><br/>
-			<input id="l_name" name="l_name" />
+			<input id="l_name" name="l_name" value="<?php echo $lname; ?>" />
 		</p>
                 <p>
 			<label for="email">Email</label><br/>
-			<input id="email" name="email" />
+			<input id="email" name="email" value="<?php echo $email; ?>" />
 		</p>
                 <p>
                     <label for="gender">Gender</label><br/>
-                    <input type="radio" value=0 id="gender" name="gender" />Male<br />
-                    <input type="radio" value=1 id="gender" name="gender" />Female<br />
+                    <input type="radio" value=0 id="gender" name="gender" <?php echo $mselected; ?> />Male<br />
+                    <input type="radio" value=1 id="gender" name="gender" <?php echo $fselected; ?> />Female<br />
                 </p>
 		<p>
 			<label for="password">Password</label><br/>
@@ -172,11 +183,11 @@ if ( $_POST )
 		</p>
 		<p>
 			<label for="code">Invite Code</label><br/>
-			<input id="invite_code" name="invite_code" />
+			<input id="invite_code" name="invite_code" value= "<?php echo $code; ?>" />
 		</p>
 
                  <p>
-                    <label for="gender">Please indicate if you will be bringing a Guest</label>
+                    <label for="guest">Please indicate if you will be bringing a Guest</label>
                     <input type="checkbox" id="guest" name="guest" /><br />
                     <div id="guest_details"></div>
                 </p>
