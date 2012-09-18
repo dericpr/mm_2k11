@@ -2,9 +2,7 @@
 
 <?php
 error_reporting(0);
-include_once "shared/ez_sql_core.php";
-include_once "ez_sql.php";
-$db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
+include_once "db.php";
 session_start();
 if ( $_POST )
 {
@@ -16,7 +14,7 @@ if ( $_POST )
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <LINK href="mm2k11.css" rel="stylesheet" type="text/css">
-        <title>Murder Mystery Party - 2011</title>
+        <title>Murder Mystery Party - 2012</title>
 
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
@@ -84,20 +82,23 @@ if ( $_POST )
     <div class="content_resize">
       <div class="mainbar">
         <div class="article">
-          <h2><span>Welcome</span> </h2>
+          <h2><span>New Party - Details coming Soon!.</span> </h2>
           <div class="clr"></div>
-          <p></p>
+          <p>Posted on 20. Aug, 2012 by Deric</p>
           <div class="clr"></div>
          <p>
-             We are very close to setting a date for the upcoming party, stay tuned to this space for more details as they become available.  We're looking at sometime in September or October and are just trying find a time that works for everyone.
-         </p>
+		  The Party production team from 2011 is ramping up the planning for the newest party. If you attended last year, you know how much fun this event can be, if you haven't yet had the chance to experience Ottawa's biggest Murder Mystery party, you'll want to score an invite this year.
+
+		  Details are still in the works, so stay tuned for more information. If you were an attendee last year, you will be automatically invited for this years party. Space will be limited, so make sure you sign up as soon as possible once registration opens. 
+		 </p>
          
         </div>
        
       </div>
       <div class="sidebar">
-        <div class="search">
+        <div class="gadget">
 
+          <div class="clr"></div>
 <?php
         if (!$_SESSION['f_name']) {
         echo "
@@ -134,7 +135,7 @@ if ( $_POST )
                 </form>
                 </table>";
         } else {
-            echo "Logged in!";
+            echo "<a href='dashboard.php'>Go to Dashboard</a>!";
         }
         ?>
         </div>

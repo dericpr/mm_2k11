@@ -1,9 +1,7 @@
 <?php
 error_reporting(0);
 session_start();
-include_once "shared/ez_sql_core.php";
-include_once "ez_sql.php";
-$db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
+include_once "db.php";
 
 //get the posted values
 $user_name=htmlspecialchars($_POST['email'],ENT_QUOTES);
@@ -29,6 +27,8 @@ if ( $users ) {
                 $_SESSION['email'] = $user->email;
                 $_SESSION['level'] = $user->access_level;
                 $_SESSION['id'] = $user->user_id;
+				$_SESSION['char_sel'] = $user->character_selected;
+				$_SESSION['paid'] = $user->paid;
                 $data['registered'] = true;
                 $data['success'] = true;
             }

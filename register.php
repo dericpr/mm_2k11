@@ -1,10 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 
 <?php
+//echo header('location: regclosed.php'); turn this back on when reg is closed
 error_reporting(0);
-include_once "shared/ez_sql_core.php";
-include_once "ez_sql.php";
-$db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
+include_once "db.php";
 session_start();
 if ( $_GET['code'] )
 {
@@ -26,7 +25,7 @@ if ( $_GET['code'] )
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <LINK href="mm2k11.css" rel="stylesheet" type="text/css">
-        <title>Murder Mystery Party - 2011</title>
+        <title>Murder Mystery Party - 2012</title>
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/arial.js"></script>
@@ -77,7 +76,8 @@ if ( $_GET['code'] )
                     else
                     {
                         $("#errorConsole").fadeOut();
-                        $("#Console").html(data.message).fadeIn();
+                        //$("#Console").html(data.message).fadeIn();
+						window.location= "http://mysteryparty.net/success.php?email="+$("#email").val();
                         
                     }
 
@@ -155,45 +155,36 @@ if ( $_GET['code'] )
           <div id="Console" style="color:blue;"></div>
           <form class="cmxform" id="signupForm" name="signupForm" method="post" action="register.php">
 	<fieldset>
-		<p>
-			<label for="firstname">First Name</label><br/>
-			<input id="f_name" name="f_name" value="<?php echo $fname; ?>" />		
-		</p>
-		<p>
-			<label for="lastname">Last name</label><br/>
+	<legend>Your info</legend>			
+<label for="firstname">First Name</label>
+			<input id="f_name" name="f_name" value="<?php echo $fname; ?>" />
+			<br>
+			<label for="lastname">Last name</label>
 			<input id="l_name" name="l_name" value="<?php echo $lname; ?>" />
-		</p>
-                <p>
-			<label for="email">Email</label><br/>
+			<br>
+			<label for="email">Email</label>
 			<input id="email" name="email" value="<?php echo $email; ?>" />
-		</p>
-                <p>
-                    <label for="gender">Gender</label><br/>
-                    <input type="radio" value=0 id="gender" name="gender" <?php echo $mselected; ?> />Male<br />
-                    <input type="radio" value=1 id="gender" name="gender" <?php echo $fselected; ?> />Female<br />
-                </p>
-		<p>
-			<label for="password">Password</label><br/>
+			<br>
+            <label for="gender">Gender</label>
+		
+            <input type="radio" value=0 id="gender" name="gender" <?php echo $mselected; ?> />Male
+            <input type="radio" value=1 id="gender" name="gender" <?php echo $fselected; ?> />Female
+			<br>
+			<label for="password">Password</label>
 			<input id="password" name="password" type="password" />
-		</p>
-
-		<p>
-			<label for="confirm_password">Confirm password</label><br/>
+			<br>
+			<label for="confirm_password">Confirm password</label>
 			<input id="confirm_password" name="confirm_password" type="password" />
-		</p>
-		<p>
-			<label for="code">Invite Code</label><br/>
+			<br>
+			<label for="code">Invite Code</label>
 			<input id="invite_code" name="invite_code" value= "<?php echo $code; ?>" />
-		</p>
+			<br>
 
-                 <p>
                     <label for="guest">Please indicate if you will be bringing a Guest</label>
-                    <input type="checkbox" id="guest" name="guest" /><br />
+                    <input type="checkbox" id="guest" name="guest" />
+					<br>
                     <div id="guest_details"></div>
-                </p>
-		<p>
                     <input type="submit" value="Register"/>
-                </p>
         </fieldset>
           </form>
          

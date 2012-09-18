@@ -2,9 +2,7 @@
 
 <?php
 error_reporting(0);
-include_once "shared/ez_sql_core.php";
-include_once "ez_sql.php";
-$db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
+include_once "db.php";
 session_start();
 if ( $_SESSION['level'] <= 0 )
     echo header('location: index.php');
@@ -17,7 +15,8 @@ if ( $_POST )
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <LINK href="mm2k11.css" rel="stylesheet" type="text/css">
-        <title>Murder Mystery Party - 2011</title>
+        <LINK href="bootstrap-1.1.0.css" rel="stylesheet" type="text/css">
+        <title>Murder Mystery Party - 2012</title>
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/arial.js"></script>
@@ -25,21 +24,53 @@ if ( $_POST )
          <script>
         $(document).ready(function() {
             // script shit here if need be
-            $.post("check_unprocessed.php",
-           function(data) {
-               if (data.count > 0 ) {
-                $(".process").html("<button style='background-color:red; color:whitesmoke'>" + data.count +"</button>").fadeIn();
-               }
+         getList(); 
+	});
+		function getList() {
+			var table = $("#reg_user_body");
+			table.html("");
+			var count = 0;
+			$.post('getregistered.php',function(data) {
+				$.each(data, function(i,rev){
+					count++;
+	    		 	table.append("<tr id='"+rev.id+"'></tr>");
+					var tr = $('tr:last', table);
+					var paid_status;
+					if ( rev.paid == 0 ) {
+						paid_status = "No";
+					} else {
+						paid_status = "Yes";
+					}
+					tr.append("<td>"+count+"<td>"+rev.name+"<td onClick=\"setActive("+rev.id+",'"+rev.fname+"','"+rev.lname+"','"+rev.email+"',"+rev.charsel+","+rev.paid+")\">"+rev.email+"<td onClick='setPaid("+rev.paid+","+rev.id+")'>"+paid_status+"<td>"+rev.character);
+				});
+			}, "json");
+			table.fadeIn();
+		}
 
-           }, 'json');
-        });
+		function setPaid(curPaid, id) {
+			$.post("mark_paid.php", {"curPaid":curPaid,"id":id}, function(data) {
+				if ( data.res == 1)
+				{
+					// redraw table
+					getList();
+				}
+				else 
+				{
+					$('#error').html("Unable to set paid status for user " + id);
+				}
+			}, 'json');
+
+		}
+
+		function setActive(id,fname,lname,email,charsel,paid)
+		{
+			$.post("set_session.php", {"f_name":fname,"l_name":lname,"email":email,"id":id,"char_sel":charsel,"paid":paid},function(data) {
+			}, 'json');
+		}
+
         </script>
          <script type="text/javascript" src="javascript_core.js"></script>
     </head>
-<?php
-
-
-?>
 
     <body>
        <div class="admin_main">
@@ -76,6 +107,54 @@ if ( $_POST )
     <div class="content_resize">
       <div class="mainbar">
         <div class="article">
+		        <div class="clr"></div>
+		<p>Here is a list of all the confirmed users and their basic stats ( paid, character selected )
+
+		Just for you Jack!</p>
+     
+	 	<div id='error'>Session Variables :
+		<?php
+		echo "ID : ".$_SESSION['id']."<br>";
+		echo "Fname : ".$_SESSION['f_name']."<br>";
+		echo "lName : ".$_SESSION['l_name']."<br>";
+		echo "Email: ".$_SESSION['email']."<br>";
+		echo "Charsel : ".$_SESSION['char_sel']."<br>";
+		echo "Paid : ".$_SESSION['paid']."<br>";
+		?>
+		</div>
+
+		</table>
+	<table id='reg_user' border='1' class='common-table zebra-striped'>
+	<thead>
+	<tr>
+		<th>#<th>Name<th>Email<th>Paid<TH>Character
+	</tr>
+	</thead>
+	<tbody id='reg_user_body'>
+	</tbody>
+	</table>
+
+	  <?php
+/*
+        $users = $db->get_results("SELECT *, C.fname as charfname, C.lname as charlname FROM user U LEFT OUTER JOIN charlist as C ON C.assigned_to = U.user_id  order by paid desc");
+		echo "<table id = 'reg_user' border='1'>";
+		echo "<th>#<th>Name<th>Email<th>Paid<TH>Character";
+		$count = 0;
+	foreach ( $users as $user )
+        {
+			$count++;
+            // Access data using object syntax
+			echo "<tr><td>".$count."<td>".$user->f_name. " ".$user->l_name;
+            echo "<td>". $user->email;
+			echo "<td id='paid' onClick='setPaid(".$user->paid.", ".$user->user_id.")'>";
+			echo ($user->paid == 1) ? "Yes" : "No";
+			echo "<td>";
+			echo ($user->charfname. " ". $user->charlname);
+        }
+		echo "</table>"
+		*/
+?>
+
 
          
         </div>
@@ -92,8 +171,8 @@ if ( $_POST )
           <ul class="sb_menu">
             <table border="0">
             <tr><td><li><a href="#">Users</a><td></li>
-            <tr><td><li><a href="#">TemplateInfo</a></li>
-            <tr><td><li><a href="#">Style Demo</a></li>
+            <tr><td><li><a href="dashboard.php">DASHBOARD</a></li>
+            <tr><td><li><a href="checkWinners.php">Voting Results!</a></li>
            <tr><td> <li><a href="#">Blog</a></li>
            <tr><td> <li><a href="#">Archives</a></li>
            <tr><td>Unprocessed <li class="process">&nbsp &nbsp</h3></li>
@@ -135,18 +214,6 @@ if ( $_POST )
     <div class="footer">
       <p class="lf">&copy; Copyright <a href="#">MyWebSite</a>.</p>
       <p class="rf">Layout by Free <a href="http://www.freewebsitetemplatez.com/">Website Templates</a></p>
-      <?php
-
-        $users = $db->get_results("SELECT * FROM user");
-	foreach ( $users as $user )
-        {
-            // Access data using object syntax
-            echo "First Name : ". $user->f_name;
-            echo "Last Name : ". $user->l_name;
-            echo "Email : ". $user->email;
-        }
-?>
-
       <div class="clr"></div>
     </div>
   </div>

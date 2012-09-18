@@ -3,9 +3,7 @@ $data['registered'] = false;
 
 error_reporting(0);
 session_start();
-include_once "shared/ez_sql_core.php";
-include_once "ez_sql.php";
-$db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
+include_once "db.php";
 $db->hide_errors();
 $f_name=htmlspecialchars($_POST['f_name'],ENT_QUOTES);
 $l_name=htmlspecialchars($_POST['l_name'],ENT_QUOTES);
@@ -54,7 +52,7 @@ if ( $invite_codes->used == 1 || $invite_codes->code == NULL ) {
 } else {
 //now validating the username and password
 
-$sql = "INSERT into user(f_name,l_name,email,password,gender) VALUES(\"$f_name\", \"$l_name\", \"$email\", \"$pass\", $gender)";
+$sql = "INSERT into user(f_name,l_name,email,password,gender,access_level) VALUES(\"$f_name\", \"$l_name\", \"$email\", \"$pass\", $gender, 1)";
 $users = $db->query($sql);
 
 if ( $db->rows_affected > 0 ) {
@@ -66,7 +64,7 @@ if ( $db->rows_affected > 0 ) {
 
     //now validating the guest username and password
     if ( strlen($gemail) > 0 ) {
-        $sql = "INSERT into user(f_name,l_name,email,password,gender) VALUES(\"$gf_name\", \"$gl_name\", \"$gemail\",\"$gpass\", $ggender)";
+        $sql = "INSERT into user(f_name,l_name,email,password,gender, access_level) VALUES(\"$gf_name\", \"$gl_name\", \"$gemail\",\"$gpass\", $ggender, 1)";
         $users = $db->query($sql);
         if ( $db->rows_affected > 0 ) {
             $data['message'] .= "<br>Successfully added guest user : $gemail";

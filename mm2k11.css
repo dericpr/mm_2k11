@@ -95,10 +95,10 @@ a.rm, a.com {
 .header_resize {
 	margin:0 auto;
 	padding:3px 0 0 0;
-	width:970px;
+	width:1024px;
 }
 .header_img {
-	width:970px;
+	width:1024px;
 	padding:20px 0 0 0;
 }
 .header_img img {
@@ -186,20 +186,13 @@ a.rm, a.com {
 	font:normal 11px Arial, Helvetica, sans-serif;
 	color:#767676;
 }
-.search form .button {
-	float:left;
-	margin:0;
-	padding:4px 0 0 0;
-	border:0;
-	position:relative;
-}
 .content {
 	padding:10px 0 0 0;
 }
 .content_resize {
 	margin:0 auto;
 	padding:20px 0 0 0;
-	width:970px;
+	width:1024px;
 }
 .content .mainbar {
 	margin:0;
@@ -214,9 +207,9 @@ a.rm, a.com {
 }
 .content .mainbar .article {
 	margin:0 0 20px 0;
-	padding:30px 20px;
+	padding:10px 10px;
         color: #767676;
-	width:610px;
+	width:650px;
 }
 .content .mainbar .article span.butons a {
 	margin:0 5px 0 0;
@@ -443,3 +436,32 @@ input.checkbox { border: none }
 input:focus { border: 1px dotted black; }
 input.error { border: 1px dotted red; }
 form.cmxform .gray * { color: gray; }
+form label { 
+	display: block;  /* block float the labels to left column, set a width */
+	float: left; 
+	width: 150px; 
+	padding: 10px; 
+	margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
+	text-align: right; 
+}
+form.login {  /* set width in form, not fieldset (still takes up more room w/ fieldset width */
+  font:100% verdana,arial,sans-serif;
+  margin: 0;
+  padding: 0;
+  min-width: 500px;
+  max-width: 600px;
+  width: 560px; 
+}
+form fieldset {
+  / * clear: both; note that this clear causes inputs to break to left in ie5.x mac, commented out */
+  border-color: #000;
+  border-width: 1px;
+  border-style: solid;
+  padding: 10px;        /* padding in fieldset support spotty in IE */
+  margin: 0;
+}
+form br {
+	clear:left;
+}
+
+

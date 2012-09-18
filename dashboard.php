@@ -2,9 +2,7 @@
 
 <?php
 error_reporting(0);
-include_once "shared/ez_sql_core.php";
-include_once "ez_sql.php";
-$db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
+include_once "db.php";
 session_start();
 if ( $_SESSION['level'] <= 0 )
     echo header('location: index.php');
@@ -17,12 +15,33 @@ if ( $_POST )
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <LINK href="mm2k11.css" rel="stylesheet" type="text/css">
-        <title>Murder Mystery Party - 2011</title>
+        <title>Murder Mystery Party - 2012</title>
+		<style>
+		.charinfo {background-color:#D2E4D2;}
+		</style>
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/arial.js"></script>
         <script type="text/javascript" src="js/cuf_run.js"></script>
          <script>
+		 function updateMain()
+		 {
+			 $('#main_article').hide();
+			 $('#main_article').html("");
+			 $('#main_article').addClass("charinfo");
+			 $('#main_article').html("<h2>Character Info</h2><a href='#' onclick='hidecharinfo()'>(-) Hide</a><br><br>This is your Character info based on the character you have selected.  If you wish to change your character you're going to have to contact <a href='mailto:greg@mysteryparty.net'>Greg</a> or <a href='mailto:dericpr@mysteryparty.net'>Deric</a> and ask them to make a change.  Since each character is written specifically for the player who has selected them we can't just re-assign a character without some consideration.  Thanks<br><br>");
+			 $.post('getchardata.php', function(data) {
+				 if ( data.res == 1 ) {
+					 $('#main_article').append(data.content).fadeIn('slow');
+			 	}
+			 }, "json");
+		 }
+
+		 function hidecharinfo()
+		 {
+			 $('#main_article').fadeOut('slow');
+		 }
+
         $(document).ready(function() {
             $('#error\\S*').hide();
             $('form[name=loginForm]').submit(function() {
@@ -35,7 +54,6 @@ if ( $_POST )
                 function(data) {
                     if(data.success)
                     {
-                        alert("Login");
                         location.href=data.redirect;
                     }
                     else
@@ -74,94 +92,57 @@ if ( $_POST )
     <div class="content_resize">
       <div class="mainbar">
         <div class="article">
+          <div class="clr"></div>
+		<div id='main_article_area'>
+		</div>
+		</div>
+		<div class="article">
+			<div id='entry'>
+            <h2><span>New Party Planning has begun!</span></h2>
+          <div class="clr"></div>
+          <p>Posted on 20. Aug, 2012 by Deric </p>
+          <div class="clr"></div>
+		  <p>
+			The Party production team from 2011 is ramping up the planning for the newest party.  If you attended last year, you know how much fun this event can be, if you haven't 
+			yet had the chance to experience Ottawa's biggest Murder Mystery party, you'll want to score an invite this year.
+		</p>
+		<p>
+			Details are still in the works, so stay tuned for more information.  If you were an attendee last year, you will be automatically invited for this years party.  Space 
+			will be limited, so make sure you sign up as soon as possible once registration opens.
+			</p>
+			</div> <!-- / entry -->
+		</div> <!-- / article -->
 
-            <h2><span>Date</span> Set</h2>
-          <div class="clr"></div>
-          <p>Posted on 12. Sep, 2011 by Deric </p>
-          <div class="clr"></div>
-          <p>On Saturday, October 15th - just in time for Hallowe'en - join over fifty of your closest friends at Ottawa's biggest and only free-form Murder Mystery Party.  There will be prizes, music and dancing, and, oh yeah, a murder!
-          </p>
-          <p>
-          The concept is simple.  Everyone gets a character with clues, and the party begins the moment you arrive.  It's not like the "out of the box" parties you may have attended in the past.  There is no scripting, and no actors.  Everyone plays in their own way.  You simply mingle with other guests to try and discover what they know, and at the end of the evening, guests vote on who they think figured the whole thing out.  The winner receives a prize.  There are also prizes for best costume, best character and more.
-          </p>
-          <p>
-          This is the fifth time we've planned a party like this, using our unique free-form system.  This year, our theme is dead historical figures, and for the first time, you get to pick your own character.  Thanks to the support of the <a href="http://www.awesomeottawa.com/" target="_blank">Awesome Ottawa</a> foundation, this year's party will be bigger and better than ever.  We're renting a space at the SAW gallery to accommodate more guests, and adding tons of new features and prizes.  There will be food available free of charge to guests.  Unfortunately, the terms of our liquor license prohibit us from telling you whether alcoholic beverages will be available for sale.
-          </p>
-          <p>
-          To help off-set the costs, we are charging guests $10.00 for tickets.  Your ticket secures your space and gets you in the door.  Custom characters are written for each guest, so it's important we know who is coming in advance.  The party is completely non-profit though - any money raised will be used to cover the costs of the party.  Additional money left over will be donated to the Ottawa Food Bank, to help those less fortunate.  Help is particularly needed around Thanksgiving, and we want to do our part and have a great time in the process.
-          </p>
-          <p>
-   
-   
-     <h3>LOCATION:  SAW Gallery, 67 Nicholas Street</h3>
-     <h3>TIME:  8 PM - 2 AM</h3>
-     <h3>TICKETS:  $10.00 </h3>
-        
-          <br>
-   
-        </p>
-        <p>
-        The Murder Mystery Party Organizing Committee
-        </p>
-        </div>
-          <!--
-        <div class="article">
-          <h2><span>Aliquam Risus</span> Justo</h2>
-          <div class="clr"></div>
-
-          <p>Posted on 18. Sep, 2015 by Sara in Filed under templates, internet, with Comments 18</p>
-          <img src="images/img_2.jpg" width="613" height="193" alt="" />
-          <div class="clr"></div>
-          <p>Pellentesque posuere enim et ipsum dignissim convallis. Proin quis molestie mauris. Nunc eget quam at nulla tempus tincidunt quis a mi. Aliquam ornare turpis non tellus molestie imperdiet. Phasellus sit amet neque vitae purus venenatis hendrerit. Phasellus non mi ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse potenti. Aenean vel varius sapien. Etiam leo quam, sodales vel ullamcorper ut, viverra a risus.</p>
-          <p>Maecenas dignissim mauris in arcu congue tincidunt. Vestibulum elit nunc, accumsan vitae faucibus vel, scelerisque a quam. Aenean at metus id elit bibendum faucibus. Curabitur ultrices ante nec neque consectetur a aliquet libero lobortis. Ut nibh sem, pellentesque in dictum eu, convallis blandit erat. Cras vehicula tellus nec purus sagittis id scelerisque risus congue. Quisque sed semper massa. Donec id lacus mauris, vitae pretium risus. Fusce sed tempor erat. </p>
-          <p><a href="#">Read more </a></p>
-        </div>
-          
-
-        <div class="article" style="padding:5px 20px 2px 20px;">
-          <p>Page 1 of 2 <span class="butons"><a href="#">3</a><a href="#">2</a> <a href="#" class="active">1</a></span></p>
-        </div>
-          -->
-      </div>
-        <!--
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="GNFZNR3ZJ88B6">
-<input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
--->
+      </div> <!-- / main_article_area> -->
       <div class="sidebar">
-         <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post">-->
-         <!--
-         <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-        <input type="hidden" name="cmd" value="_xclick">
-        <input type="hidden" name="business" value="F8A598Y3CMSEC">
-        <input type="hidden" name="lc" value="CA">
-        <input type="hidden" name="item_name" value="Murdery Mystery Payment">
-        <input type="hidden" name="item_number" value="10042">
-        <input type="hidden" name="amount" value="10.00">
-        <input type="hidden" name="currency_code" value="CAD">
-        <input type="hidden" name="button_subtype" value="services">
-        <input type="hidden" name="tax_rate" value="0.000">
-        <input type="hidden" name="shipping" value="0.00">
-        <input type="hidden" name="return" value="http://mysteryparty.net/paid.php">
-        <input type="hidden" name="rm" value="2">
-        <input type="hidden" name="cancel_return" value="http://mysteryparty.net/cancel.php">
-        <input type="hidden" name="invoice" value="<?php echo $_SESSION['id'];?>">
-        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
-         -->
-        <!--<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	  <?php  
+	  if ($_SESSION['paid'] == 0 )
+	  {
+	
+        echo "<form action='https://www.paypal.com/cgi-bin/webscr' method='post'>";
+        echo "<input type='hidden' name='cmd' value='_xclick'>";
+       echo " <input type='hidden' name='business' value='F8A598Y3CMSEC'>";
+        echo "<input type='hidden' name='lc' value='CA'>";
+       echo " <input type='hidden' name='item_name' value='Murdery Mystery Payment - 2012'>";
+       echo " <input type='hidden' name='item_number' value='10042'>";
+       echo " <input type='hidden' name='amount' value='10.00'>";
+        echo "<input type='hidden' name='currency_code' value='CAD'>";
+        echo "<input type='hidden' name='button_subtype' value='services'>";
+        echo "<input type='hidden' name='tax_rate' value='0.000'>";
+        echo "<input type='hidden' name='shipping' value='0.00'>";
+        echo "<input type='hidden' name='return' value='http://mysteryparty.net/paid.php'>";
+       echo " <input type='hidden' name='rm' value='2'>";
+       echo " <input type='hidden' name='cancel_return' value='http://mysteryparty.net/cancel.php'>";
+       echo " <input type='hidden' name='invoice' value='".  $_SESSION['id']."'>";
+       echo " <input type='hidden' name='bn' value='PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted'>";
         
-        <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-
-        </form>
--->
-
-        <div class="search">
-
+        echo "<input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'>";
+        echo "<img alt='' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'>";
+        
+        echo "</form>";
+	}
+	?>
+<div class = 'gadget'>
 <?php
         if (!$_SESSION['f_name']) {
         echo "
@@ -198,17 +179,31 @@ if ( $_POST )
                 </form>
                 </table>";
         } else {
-            echo "Logged in : ". $_SESSION['email'];
         }
         ?>
-        </div>
+		</div>
         <div class="gadget">
-          <h2>Sidebar Menu</h2>
+          <h2>Game Menu</h2>
 
           <div class="clr"></div>
-          <ul class="sb_menu">
+            <?php echo "<h3 style='color:DodgerBlue'>Active User : ". $_SESSION['f_name']. "</h3>";
+			if ($_GET['cs'] == 1 )
+			{
+				echo "<h3 style='color:red'>Character Selected</h3>";
+			}
+			?>
+
+<ul class="sb_menu">
             <li><a href="dashboard.php">Home</a></li>
-            <li><a href="character.php">Character Info</a></li>
+<!--            <li><a style='color: #ff0000;' href="charinfo.php">!! Character Info - Important !!</a></li> -->
+			<?php if ( $_SESSION['char_sel'] == 1 ) { 
+ 				echo "<li><a style='color:#ff0000;' href='charinfo.php'>Character Info</a></li>";
+			} else {
+				echo "<li><a href='character.php'>Select your character</a></li>";
+			}
+			?>
+			<li><a href="http://www.jacksworks.com/?page_id=362" target="_blank">Previous Party Pics</a>
+            <li><a href="logout.php">Logout</a></li>
           </ul>
         </div>
        <div class="gadget">

@@ -2,9 +2,7 @@
 
 <?php
 error_reporting(0);
-include_once "shared/ez_sql_core.php";
-include_once "ez_sql.php";
-$db = new ezSQL_mysql('mm_user','yeradeadman232','mm_2k11','localhost');
+include_once "db.php";
 session_start();
 if ( $_POST )
 {
@@ -15,7 +13,7 @@ if ( $_POST )
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <LINK href="mm2k11.css" rel="stylesheet" type="text/css">
-        <title>Murder Mystery Party - 2011</title>
+        <title>Murder Mystery Party - 2012</title>
         <script type="text/javascript" src="jquery.js"></script>
         <script type="text/javascript" src="js/cufon-yui.js"></script>
         <script type="text/javascript" src="js/arial.js"></script>
